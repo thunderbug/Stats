@@ -1,0 +1,62 @@
+<div id="content">
+	<div id="subtitle">
+    	<h2>Player Statistics</h2>
+    	<div id="pages">
+    		<p> Total results: <span id="pagenum">{{Data.total}}</span></p>
+    		<p>Results per page: </p>
+    		<select id="page-results">
+				<option value="10">10</option>
+				<option value="25">25</option>
+				<option value="50">50</option>
+				<option value="100" selected="selected">100</option>
+			</select>
+			<div id="page-links">
+				<button id="prev">&#9664;</button>
+				<button id="next">&#9654;</button>
+			</div>
+		</div>
+    	<form method="get" action="" id="searchform" onsubmit="return false;">
+			<img src="{{ URL }}css/images/icons/search-icon.png" alt="search_icon">
+			<input id="searchbar" name="search" type="text" placeholder="Search...">
+		</form>
+	</div>
+    <table id ="main_table">
+        <tr id="tabnames">
+            <td id="name">NAME</td>
+			<td id="kills">KILLS</td>
+			<td id="deaths">DEATHS</td>
+			<td id="suicides">SUICIDES</td>
+			<td id="kd_ratio">K/D RATIO</td>
+			<td id="score">SCORE</td>
+			<td id="playtime">TIME PLAYED</td>
+			<td id="connection">CONNECTIONS</td>
+			<td id="last_seen">LAST SEEN</td>
+        </tr>
+        {% for Player in Data %}
+        {% if Player.name_id is not empty %}
+            {% if loop.index is even %}
+                <tr class="row1">
+            {% else %}
+                <tr class="row2">
+            {% endif %}
+                <td class="name">
+                    {% if Player.Flag|length > 0 %}
+                        <img src="{{ URL }}/css/images/flags/{{ Player.Flag }}.png">&nbsp;
+                    {% endif %}
+                   <a href="{{ URL }}/game/{{ Game }}/action/usr/user/{{Player.name_id}}">{{ Player.name }}</a></td>
+                <td class="kills">{{ Player.kills }}</td>
+                <td class="deaths">{{ Player.deaths }}</td>
+                <td class="suicides">{{ Player.suicides }}</td>
+                <td class="kd_ratio">{{ Player.kd_ratio }}</td>
+                <td class="score">{{ Player.score }}</td>
+                <td class="time">{{ Player.time }}</td>
+                <td class="connections">{{ Player.connections }}</td>
+                <td class="last_seen">{{ Player.last_seen }}</td>
+            </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
+</div>
+
+<script src="{{ URL }}js/players.js"></script>
+<script src="{{ URL }}js/core.js"></script>

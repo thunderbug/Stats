@@ -1,0 +1,34 @@
+<div id="content">
+    <div id="subtitle">
+    	<h2>Server Statistics</h2>
+    	<form method="get" action="" id="searchform" onsubmit="return false;">
+			<input id="searchbar" name="search" type="text" placeholder="Search...">
+		</form>
+	</div>
+    <table id ="main_table">
+        <tr id="tabnames">
+            <td># SERVER</td>
+            <td>IP</td>
+            <td>PORT</td>
+            <td>KILLS</td>
+            <td>DEATHS</td>
+            <td>SUICIDES</td>
+            <td>HEADSHOTS</td>
+        </tr>
+        {% for Server in Data %}
+            {% if loop.index is even %}
+                <tr class="row1">
+            {% else %}
+                <tr class="row2">
+            {% endif %}
+                <td class="server_id">{{ Server.server_id }}</td>
+                <td class="ip">{{ Server.ip }}</td>
+                <td class="port">{{ Server.port }}</td>
+                <td class="kills">{{ Server.kills }}</td>
+                <td class="deaths">{{ Server.deaths }}</td>
+                <td class="suicides">{{ Server.suicides }}</td>
+                <td class="hs">{{ Server.hs }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>

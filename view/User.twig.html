@@ -1,0 +1,136 @@
+<div id="content">
+	<div id="subtitle">
+    	<h2>Player Statistics</h2>
+    	<form method="get" action="" id="searchform" onsubmit="return false;">
+			<img src="{{ URL }}css/images/icons/search-icon.png" alt="search_icon">
+			<input id="searchbar" name="search" type="text" placeholder="Search...">
+		</form>
+	</div>
+   <div id="player_content">
+   		<div id="detach"></div>
+   		<div id="info_container">
+   			<div id="player_info">
+   				<img id="player_pic" src="{{URL}}css/images/icons/default-avatar.png" alt="avatar">
+   				<h3>{{Player.name}}</h3>
+   				<img id="player_flag" src="https://cp.justforfun-gaming.com/template/jff/img/flags/{{ Player.flag }}.png" alt="country">
+   				<p id="player_country">{{Player.country_name}} • <a href="#">Forum profile</a></p>
+   			</div>
+   			<div id="player_seen">
+   				<p class="title">LAST SEEN</p>
+   				<p class="big">{{Player.last_seen}}</p>
+   			</div>
+   			<div id="connections">
+   				<p class="title">CONNECTIONS</p>
+   				<p class="big">{{Player.connections}}</p>
+   			</div>
+   			<div id="ratio_cont">
+   				<p class="title">K/D RATIO</p>
+   				<p id="kd" class="big">{{Player.kd_ratio}}</p>
+   				<div id="kd_graph">
+   					<div id="k"></div>
+   					<div id="d"></div>
+   				</div>
+   			</div>
+   		</div>
+   		<div id="player_stats">
+   			<ul id="main_stats">
+   				<li>
+   					<img src="{{URL}}css/images/icons/kills.png">
+   					<p class="title">KILLS</p>
+   					<p class="big">{{Player.kills}}</p>
+   				</li>
+   				<li>
+   					<img src="{{URL}}css/images/icons/deaths.png">
+   					<p class="title">DEATHS</p>
+   					<p class="big">{{Player.deaths}}</p>
+   				</li>
+   				<li>
+   					<img src="{{URL}}css/images/icons/suicide.png">
+   					<p class="title">SUICIDES</p>
+   					<p class="big">{{Player.suicides}}</p>
+   				</li>
+   				<li>
+   					<img src="{{URL}}css/images/icons/score.png">
+   					<p class="title">SCORE</p>
+   					<p class="big">{{Player.score}}</p>
+   				</li>
+   				<li>
+   					<img src="{{URL}}css/images/icons/time.png">
+   					<p class="title">TIME PLAYED</p>
+   					<p class="big">{{Player.time}}</p>
+   				</li>
+   			</ul>
+   		</div>
+   		<div id="player_extra">
+   			<div id="player_hits">
+   				<p class="title">BODYHITS</p>
+   				<div id="hits_graph">
+   					<canvas id="chart-area" width="500" height="500"></canvas>
+   				</div>
+   				<dl id="hits_list" class="def_list">
+   				</dl>
+   			</div>
+   			<div id="top_weapon">
+   				<dl class="def_list">
+   					<p class="title">TOP WEAPON</p>
+   					<dt>Name</dt>
+   					{% if Player.weapon.weapon_nicename %}
+   						<dd>{{Player.weapon.weapon_nicename}}</dd>
+   					{% else %}
+   						<dd>{{Player.weapon.weapon_name}}</dd>
+   					{% endif %}
+   					<dt>Kills</dt>
+   					<dd>{{Player.weapon.kills}}</dd>
+   					<dt>Deaths</dt>
+   					<dd>{{Player.weapon.deaths}}</dd>
+   					<dt>Suicides</dt>
+   					<dd>{{Player.weapon.suicides}}</dd>
+   				</dl>
+   			</div>
+   			<div id="signature">
+           		<dl class="def_list">
+               		<p class="title">SIGNATURE</p>
+               		<img id="sig_pic" src="{{URL}}signature/{{ Game }}/{{Player.name_id}}.{{Player.name}}">
+               		<dt>Forum</dt>
+               		<dd><input id="ForumURL" type="text" size="50" value="[url={{URL}}game/{{ Game }}/action/usr/user/{{Player.name_id}}][img]{{URL}}signature/{{ Game }}/{{Player.name_id}}.{{Player.name}}[/img][/url]"></dd>
+               		<dt>HTML</dt>
+               		<dd><input id="htmlURL" type="text" size="50" value="<a href='{{URL}}game/{{ Game }}/action/usr/user/{{Player.name_id}}'><img src='{{URL}}signature/{{ Game }}/{{Player.name_id}}.{{Player.name}}'></a>"></dd>
+           		</dl>
+       		</div>
+       		{% if ForumID == false %}
+            	<div id="extra_data">
+                	<dl class="def_list">
+                    	<p class="title">EXTRA INFO</p>
+                    	<dt>To get more info on your stats page, create a forum account, install JFF-Addon and use !register in-game.</dt>
+                	</dl>
+            	</div>
+       		{% else %}
+           		<div id="best-kills">
+               		<dl class="def_list">
+                   		<p class="title">BEST KILLS</p>
+                   		{% for Kill in BestKilled %}
+                   		<dt><a href="{{URL}}game/{{ Game }}/action/usr/user/{{Kill.DeathsID}}">{{ Kill.Name }}</a></dt>
+                   		<dd>{{ Kill.DeathsA }}</dd>
+                   		{% endfor %}
+               		</dl>
+           		</div>
+            	<div id="best_deaths">
+               		<dl class="def_list">
+                   		<p class="title">BEST DEATHS</p>
+                   		{% for Kill in BestKilled %}
+                   		<dt><a href="{{URL}}game/{{ Game }}/action/usr/user/{{Kill.DeathsID}}">{{ Kill.Name }}</a></dt>
+                   		<dd>{{ Kill.DeathsA }}</dd>
+                   		{% endfor %}
+               		</dl>
+            	</div>
+       		{% endif %}
+   		</div> 
+   </div>
+</div>
+<script type="application/javascript">
+	var k ={{Player.kills}};
+	var d ={{Player.deaths}};
+	var user = {{Player.name_id}};
+</script>
+<script src="{{ URL }}js/core.js"></script>
+<script src="{{ URL }}js/user.js"></script>

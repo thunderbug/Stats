@@ -1,0 +1,31 @@
+<div id="content">
+    <div id="subtitle">
+    	<h2>Maps Statistics</h2>
+    	<form method="get" action="" id="searchform" onsubmit="return false;">
+			<input id="searchbar" name="search" type="text" placeholder="Search...">
+		</form>
+	</div>
+    <table id ="map_table" cellspacing="0">
+        <tr id="tabnames">
+            <td>MAP NAME</td>
+            <td>ROUNDS PLAYED</td>
+            <td>TOTAL KILLS</td>
+            <td>TOTAL SUICIDES</td>
+        </tr>
+        {% for Maps in Data %}
+        	{% if loop.index is even %}
+                <tr class="map-row1">
+            {% else %}
+            	<tr class="map-row2">
+           	{% endif %} 
+                <td class="map-td">
+                    <img src="../../../{{ Maps.image }}" class="map-pic">
+                    <span class='map-name'>{{ Maps.map_name }}</span>
+                </td>
+                <td>{{ Maps.rounds }}</td>
+                <td>{{ Maps.kills }}</td>
+                <td>{{ Maps.suicides }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>

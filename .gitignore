@@ -1,0 +1,4 @@
+## Ignore files | https://help.github.com/articles/ignoring-files/
+config.ini
+.idea
+config.php

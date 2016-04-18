@@ -1,0 +1,7 @@
+RewriteEngine  on
+
+RewriteRule ^game/([^/]*)$   index.php?section=$1
+RewriteRule ^game/([^/]*)/action/([^/]*)$   index.php?section=$1&action=$2
+RewriteRule ^game/([^/]*)/action/([^/]*)/user/([^/]*)$   index.php?section=$1&action=$2&user=$3
+
+RewriteRule ^signature/([^/]*)/([0-9]*).([^/]*)$     index.php?section=signature&game=$1&user=$2

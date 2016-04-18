@@ -1,0 +1,32 @@
+<div id="content">
+    <div id="subtitle">
+    	<h2>Weapon Statistics</h2>
+    	<form method="get" action="" id="searchform" onsubmit="return false;">
+			<input id="searchbar" name="search" type="text" placeholder="Search...">
+		</form>
+	</div>
+    <table id ="main_table">
+        <tr id="tabnames">
+            <td>WEAPON ID</td>
+            <td>WEAPON NAME</td>
+            <td>KILLS</td>
+            <td>SUICIDES</td>
+        </tr>
+        {% for Weapons in Data %}
+            {% if loop.index is even %}
+                <tr class="row1">
+            {% else %}
+                <tr class="row2">
+            {% endif %}
+                <td class="weapon_id">{{ Weapons.weapon_id }}</td>
+            {% if Weapons.weapon_nicename %}
+                <td class="weapon_name">{{ Weapons.weapon_nicename }}</td>
+            {% else %}
+            	 <td class="weapon_name">{{ Weapons.weapon_name }}</td>
+            {% endif %}
+                <td class="kills">{{ Weapons.kills }}</td>
+                <td class="suicides">{{ Weapons.suicides }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
